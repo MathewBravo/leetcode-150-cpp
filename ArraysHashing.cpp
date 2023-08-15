@@ -2,6 +2,7 @@
 // Created by MathewBravo on 2023-08-15.
 //
 
+#include <queue>
 #include "ArraysHashing.h"
 
 bool ArraysHashing::containsDuplicate(vector<int> &nums) {
@@ -43,4 +44,34 @@ vector<vector<string>> ArraysHashing::groupAnagrams(vector<string> &strs) {
         result.push_back(res.second);
     }
     return result;
+}
+
+vector<int> ArraysHashing::topKFrequent(vector<int> &nums, int k) {
+    std::unordered_map<int, int> counter;
+    for (auto num : nums){
+       counter[num]++;
+    }
+
+    auto compare = [](const std::pair<int, int>& a, const std::pair<int, int>& b){
+        return a.second > b.second;
+    };
+
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(compare)> min_heap(compare);
+
+    for (const auto& pair : counter) {
+        min_heap.emplace(pair);
+        if (min_heap.size() > k) {
+            min_heap.pop();
+        }
+    }
+
+    std::vector<int> result;
+    while (!min_heap.empty()) {
+        result.push_back(min_heap.top().first);
+        min_heap.pop();
+    }
+    std::reverse(result.begin(), result.end());
+
+    return result;
+
 }
