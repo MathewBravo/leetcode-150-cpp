@@ -1,6 +1,9 @@
 #include <iostream>
+#include "SlidingWindow.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    SlidingWindow *sw = new SlidingWindow();
+    auto result = sw->lengthOfLongestSubstring("abcabcbb");
+    std::cout << result;
 }
+

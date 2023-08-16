@@ -7,4 +7,8 @@ add_executable(needcode main.cpp
         ArraysHashing.cpp
         ArraysHashing.h
         TwoPointers.cpp
-        TwoPointers.h)
+        TwoPointers.h
+        Stack.cpp
+        Stack.h
+        SlidingWindow.cpp
+        SlidingWindow.h)
