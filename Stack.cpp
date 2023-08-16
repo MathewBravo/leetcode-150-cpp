@@ -2,6 +2,7 @@
 // Created by MathewBravo on 2023-08-16.
 //
 
+#include <unordered_set>
 #include "Stack.h"
 
 bool Stack::isValid(string s) {
@@ -89,4 +90,30 @@ int Stack::search(vector<int> &nums, int target) {
     }else{
         return -1;
     }
+}
+
+int Stack::evalRPN(vector<string> &tokens) {
+    std::stack<int> operands;
+    std::unordered_set<string> operators({"+", "-", "/", "*"});
+    for (auto& token: tokens){
+        if (operators.count(token) == 0){
+            int tok = std::stoi(token);
+            operands.push(tok);
+        }else{
+            int op2 = operands.top();
+            operands.pop();
+            int op1 = operands.top();
+            operands.pop();
+            if(token == "+"){
+                operands.push(op1 + op2);
+            }else if (token == "-"){
+                operands.push(op1 - op2);
+            }else if (token == "/"){
+                operands.push(op1 / op2);
+            }else if (token == "*"){
+                operands.push(op1 * op2);
+            }
+        }
+    }
+    return operands.top();
 }

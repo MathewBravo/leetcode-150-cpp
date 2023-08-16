@@ -19,6 +19,7 @@ class ArraysHashing {
     vector<vector<string>> groupAnagrams(vector<string>& strs);
     vector<int> topKFrequent(vector<int>& nums, int k);
     bool isValidSudoku(vector<vector<char>>&board);
+    int longestConsecutive(vector<int>& nums);
 };
 
 

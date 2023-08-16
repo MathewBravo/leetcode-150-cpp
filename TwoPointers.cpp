@@ -62,3 +62,49 @@ int TwoPointers::trap(vector<int> &height) {
     }
     return sum;
 }
+
+vector<vector<int>> TwoPointers::threeSum(vector<int> &nums) {
+    vector<vector<int>> result;
+    std::sort(nums.begin(), nums.end());
+    for (int i = 0; i < nums.size(); i++) {
+        if (i > 0 && nums[i-1] == nums[i]) {
+            continue;
+        }
+        int left = i + 1, right = nums.size() - 1;
+        while(left < right) {
+            int sum = nums[i] + nums[left] + nums[right];
+            if(sum > 0) {
+                right--;
+            } else if(sum < 0) {
+                left++;
+            } else {
+                result.push_back({nums[i], nums[left], nums[right]});
+
+                // Correct handling of duplicates
+                while(left < right && nums[left] == nums[left+1]) {
+                    left++;
+                }
+                while(right > left && nums[right] == nums[right-1]) {
+                    right--;
+                }
+                left++;
+                right--;
+            }
+        }
+    }
+    return result;
+}
+
+int TwoPointers::maxArea(vector<int> &height) {
+    int left = 0, right = height.size()-1, max_area = 0;
+    while (left < right){
+        int cur_area = height[left] < height[right] ? height[left] * (right - left) : height[right] * (right - left);
+        max_area = max_area > cur_area ? max_area : cur_area;
+        if (height[left] < height[right]){
+            left++;
+        }else{
+            right--;
+        }
+    }
+    return max_area;
+}

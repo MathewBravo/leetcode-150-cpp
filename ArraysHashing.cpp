@@ -100,3 +100,32 @@ bool ArraysHashing::isValidSudoku(vector<vector<char>> &board) {
     }
     return true;
 }
+
+int ArraysHashing::longestConsecutive(vector<int> &nums) {
+    if(nums.size() <=1){
+        return nums.size();
+    }
+
+    std::unordered_set<int> num_map;
+
+    for (int num : nums){
+        num_map.insert(num);
+    }
+
+    int longestStreak = 0;
+
+    for (int num : nums){
+        if (!num_map.count(num-1)){
+            int currentNum = num, currentStreak = 1;
+
+            while(num_map.count(currentNum + 1)){
+                currentNum++;
+                currentStreak++;
+            }
+
+            longestStreak = longestStreak > currentStreak ? longestStreak : currentStreak;
+        }
+    }
+
+    return longestStreak;
+}

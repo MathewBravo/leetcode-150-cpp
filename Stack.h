@@ -26,6 +26,7 @@ public:
         int getMin();
     };
     int search(vector<int>& nums, int target);
+    int evalRPN(vector<string>& tokens);
 
 };
 
