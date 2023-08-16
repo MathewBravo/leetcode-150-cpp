@@ -18,6 +18,7 @@ class ArraysHashing {
     vector<int> twoSum(vector<int>&nums, int target);
     vector<vector<string>> groupAnagrams(vector<string>& strs);
     vector<int> topKFrequent(vector<int>& nums, int k);
+    bool isValidSudoku(vector<vector<char>>&board);
 };
 
 

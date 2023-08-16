@@ -3,6 +3,7 @@
 //
 
 #include <queue>
+#include <unordered_set>
 #include "ArraysHashing.h"
 
 bool ArraysHashing::containsDuplicate(vector<int> &nums) {
@@ -74,4 +75,28 @@ vector<int> ArraysHashing::topKFrequent(vector<int> &nums, int k) {
 
     return result;
 
+}
+
+bool ArraysHashing::isValidSudoku(vector<vector<char>> &board) {
+    std::vector<std::unordered_set<int>> row(9), col(9), box(9);
+    for (int i = 0; i < board.size(); i++){
+        for (int j = 0; j < board[0].size(); j++){
+            char piece = board[i][j];
+            if (piece == '.') continue;
+
+            int val = piece - '0';
+
+            if (row[i].find(val) != row[i].end()) return false;
+            row[i].insert(val);
+
+            if (col[j].find(val) != col[j].end()) return false;
+            col[j].insert(val);
+
+            int box_index = (i / 3) * 3 + (j /3);
+
+            if(box[box_index].find(val) != box[box_index].end()) return false;
+            box[box_index].insert(val);
+        }
+    }
+    return true;
 }
