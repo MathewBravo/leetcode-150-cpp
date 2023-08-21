@@ -27,6 +27,7 @@ public:
     };
     int search(vector<int>& nums, int target);
     int evalRPN(vector<string>& tokens);
+    vector<string> generateParenthesis(int n);
 
 };
 
