@@ -43,13 +43,13 @@ int SlidingWindow::lengthOfLongestSubstring(string s) {
 }
 
 int SlidingWindow::characterReplacement(string s, int k) {
-    int left = 0, right = 0, max_count = 0, max_length;
-    vector<int> counts(26,0);
+    vector<int> counts(26, 0);
+    int left = 0, right = 0, max_count = 0, max_length = 0;
+
     for (right = 0; right < s.length(); right++) {
         counts[s[right] - 'A']++;
         max_count = std::max(max_count, counts[s[right] - 'A']);
 
-        // If characters other than the most frequent character exceed k, move the left pointer
         if (right - left + 1 - max_count > k) {
             counts[s[left] - 'A']--;
             left++;
