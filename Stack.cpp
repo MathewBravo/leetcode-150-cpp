@@ -138,3 +138,62 @@ vector<string> Stack::generateParenthesis(int n) {
     ::generateParenthesis(n,n, "", result);
     return result;
 }
+
+vector<int> Stack::dailyTemperature(vector<int> &temperatures) {
+    stack<int> temp_indices;
+    vector<int> result(temperatures.size(), 0);
+    for (int i = 0; i < temperatures.size(); i++){
+        while(!temp_indices.empty() && temperatures[i] > temperatures[temp_indices.top()]){
+            int prevIndex = temp_indices.top();
+            temp_indices.pop();
+            result[prevIndex] = i - prevIndex;
+        }
+        temp_indices.push(i);
+    }
+    return result;
+}
+
+int Stack::largestRectangleArea(vector<int> &heights) {
+    stack<int> indices;
+    int max_area = 0;
+    for (int i = 0; i < heights.size(); i++){
+        while(!indices.empty() && heights[i] < heights[indices.top()]){
+            int height = heights[indices.top()];
+            indices.pop();
+            int width = indices.empty() ? i : i - indices.top() - 1;
+            max_area = std::max(max_area, height * width);
+        }
+        indices.push(i);
+    }
+    while(!indices.empty()) {
+        int height = heights[indices.top()];
+        indices.pop();
+        int width = indices.empty() ? heights.size() : heights.size() - indices.top() - 1;
+        max_area = std::max(max_area, height * width);
+    }
+    return max_area;
+}
+
+int Stack::carFleet(int target, vector<int> &position, vector<int> &speed) {
+    vector<std::pair<int, double>> cars;
+
+    cars.reserve(position.size());
+    for (int i =0; i < position.size(); i++){
+        cars.emplace_back(position[i], (double)(target-position[i])/speed[i]);
+    }
+
+    sort(cars.rbegin(), cars.rend());
+
+    stack<double> time_of_arrival;
+    int fleets = 0;
+    for (const auto& car : cars){
+        double arrivalTime = car.second;
+
+        if(time_of_arrival.empty() || arrivalTime > time_of_arrival.top()){
+            fleets++;
+            time_of_arrival.push(arrivalTime);
+        }
+    }
+    return fleets;
+}
+

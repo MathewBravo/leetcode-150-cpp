@@ -13,4 +13,6 @@ add_executable(needcode main.cpp
         SlidingWindow.cpp
         SlidingWindow.h
         BinaryTree.cpp
-        BinaryTree.h)
+        BinaryTree.h
+        BitWise.cpp
+        BitWise.h)
