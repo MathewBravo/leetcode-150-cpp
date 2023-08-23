@@ -17,6 +17,8 @@ class SlidingWindow {
 public:
     int maxProit(vector<int>& prices);
     int lengthOfLongestSubstring(string s);
+    int characterReplacement(string s, int k);
+    bool checkInclusion(string s1, string s2);
 };
 
 
